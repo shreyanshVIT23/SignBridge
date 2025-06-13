@@ -16,7 +16,7 @@ from helpers.middleware import sanitize_input
 from helpers.logging_middleware import DatabaseLoggingMiddleware
 import logging
 import time
-from routes.v1.sign_language_routes import router as sign_language_router
+from routes.v2.sign_language_routes import router as sign_language_router
 from database.database import AppLog, SessionLocal, engine, Base
 
 
