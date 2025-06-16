@@ -1,0 +1,378 @@
+:root {
+  --primary-color: #643a71;
+  --secondary-color: #8b5fbf;
+  --accent-color: #d183c9;
+  --highlight-color: #e3879e;
+  --light-color: #fec0ce;
+  --dark-text: #333333;
+  --light-text: #ffffff;
+  --background: #f8f9fa;
+  --error-color: #ff5252;
+  --success-color: #4caf50;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--dark-text);
+  min-height: 100vh;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+/* Navigation */
+.navbar {
+  background-color: var(--primary-color);
+  color: var(--light-text);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--light-text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand i {
+  margin-right: 0.5rem;
+}
+
+.navbar-nav {
+  display: flex;
+  list-style: none;
+}
+
+.nav-item {
+  margin-left: 1.5rem;
+}
+
+.nav-link {
+  color: var(--light-text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--light-color);
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background-color: var(--secondary-color);
+  color: var(--light-text);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-color);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--light-color);
+  color: var(--light-text);
+}
+
+.btn-outline:hover {
+  background-color: var(--light-color);
+  color: var(--primary-color);
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Auth Forms */
+.auth-container {
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+}
+
+.auth-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.auth-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+}
+
+.auth-form .btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1rem;
+}
+
+.auth-form .btn:hover {
+  background-color: var(--secondary-color);
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.auth-footer a {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Main Content */
+.main-content {
+  display: flex;
+  margin-top: 2rem;
+  min-height: calc(100vh - 200px);
+}
+
+.input-section {
+  flex: 1;
+  padding: 1.5rem;
+  border-right: 1px solid #eee;
+}
+
+.output-section {
+  flex: 1;
+  padding: 1.5rem;
+}
+
+.section-title {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+/* Speech Input */
+.speech-input {
+  display: flex;
+  margin-bottom: 1.5rem;
+}
+
+.speech-input input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  font-size: 1rem;
+}
+
+.speech-input input:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+}
+
+.mic-btn {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.mic-btn:hover {
+  background-color: var(--accent-color);
+}
+
+.mic-btn.recording {
+  background-color: var(--error-color);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.submit-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.submit-btn:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Word List */
+.word-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.word-item {
+  margin-right: 0.75rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--light-color);
+  color: var(--primary-color);
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.word-item.active {
+  background-color: var(--accent-color);
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Video Player */
+.video-container {
+  width: 100%;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.video-controls {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background-color: var(--primary-color);
+}
+
+.control-btn {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.control-btn:hover {
+  background-color: var(--accent-color);
+}
+
+#videoPlayer {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+  }
+
+  .input-section {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+}
+
+/* Loader */
+.loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Alert */
+.alert {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.alert-error {
+  background-color: #ffebee;
+  color: var(--error-color);
+  border: 1px solid var(--error-color);
+}
+
+.alert-success {
+  background-color: #e8f5e9;
+  color: var(--success-color);
+  border: 1px solid var(--success-color);
+}
