@@ -9,7 +9,7 @@ BACKEND_PID=$!
 
 # Start frontend
 cd ../frontend
-npm start &
+npm run dev -- --host --port 5173 &
 FRONTEND_PID=$!
 
 echo "Backend running on http://localhost:8000"
