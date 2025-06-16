@@ -28,7 +28,7 @@ class Settings(BaseSettings):
     Attributes:
         host (str): The host address to bind the server. Defaults to '0.0.0.0'.
         port (int): The port number to bind the server. Defaults to 8000.
-        video_dir (Path): Absolute directory path where video files are stored.
+        video_dir (Path): Absolute directory path where video files are stored. Defaults to 'assets'.
         gemini_api_key (str): API key for Gemini AI model.
         cors_origins (List[str]): List of allowed CORS origins.
 
@@ -45,7 +45,7 @@ class Settings(BaseSettings):
     """
     host: str = "0.0.0.0"
     port: int = 8000
-    video_dir: Path = BASE_DIR / "assets"
+    video_dir: Path = BASE_DIR / "assets" / "videos"
     gemini_api_key: str
     cors_origins: List[str] = []
 
