@@ -3,8 +3,8 @@ echo "Starting development servers..."
 
 # Start backend
 cd backend
-source venv/bin/activate
-uvicorn main:app --reload --port 8000 &
+source .venv/bin/activate
+uvicorn app:app --reload --port 8000 &
 BACKEND_PID=$!
 
 # Start frontend
@@ -13,7 +13,7 @@ npm start &
 FRONTEND_PID=$!
 
 echo "Backend running on http://localhost:8000"
-echo "Frontend running on http://localhost:3000"
+echo "Frontend running on http://localhost:5173"
 echo "Press Ctrl+C to stop both servers"
 
 # Wait for Ctrl+C
