@@ -11,17 +11,28 @@ Routes:
 """
 
 from fastapi import FastAPI, Request
-from pathlib import Path
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from helpers.middleware import sanitize_input
 from helpers.logging_middleware import DatabaseLoggingMiddleware
 import logging
 import time
-from routes.v2.sign_language_routes import router as sign_language_router
+from routes.v0.sign_language_routes import router as sign_language_router
 from database.database import AppLog, SessionLocal, engine, Base
-
+from utils.config import settings
 
 logging.basicConfig(level=logging.DEBUG)
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # Your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"],  # Add this to expose headers
+)
 
 # Add middleware
 app.middleware("http")(DatabaseLoggingMiddleware())
@@ -30,8 +41,11 @@ app.include_router(sign_language_router)
 # Create tables
 Base.metadata.create_all(bind=engine)
 
+# Mount static files
+app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 
-Base.metadata.create_all(bind=engine)
+# Mount videos directory
+app.mount("/videos", StaticFiles(directory=str(settings.video_dir), html=True), name="videos")
 
 
 async def log_request_response(
