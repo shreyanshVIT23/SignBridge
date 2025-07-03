@@ -16,10 +16,16 @@ if (-not (Get-Command npm -ErrorAction SilentlyContinue)) {
 # Setup Backend
 Write-Host "Setting up Python backend..."
 Set-Location backend
+
+# Create virtual environment
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+
+# Install dependencies using .venv's pip
+& ".\.venv\Scripts\python.exe" -m pip install --upgrade pip
+& ".\.venv\Scripts\python.exe" -m pip install -r requirements.txt
+
 Set-Location ..
+
 
 # Setup Frontend
 Write-Host "Setting up React frontend..."
