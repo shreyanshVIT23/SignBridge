@@ -20,7 +20,7 @@ const LandingPage = () => {
               </div>
               
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
-                Breaking barriers in <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">sign language</span> communication
+                Breaking barriers in <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 animate-pulse">sign language</span> communication
               </h2>
               
               <p className="text-xl text-gray-600 mb-8">
@@ -28,11 +28,11 @@ const LandingPage = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                <Link to="/register" className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1">
+                <Link to="/register" className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
                   Get Started
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
-                <Link to="/login" className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 shadow-sm transition duration-300 ease-in-out">
+                <Link to="/login" className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 shadow-sm transition duration-300 ease-in-out hover:shadow-md hover:scale-105">
                   Sign In
                 </Link>
               </div>
@@ -40,10 +40,10 @@ const LandingPage = () => {
             
             <div className="hidden md:block md:w-1/2 mt-10 md:mt-0">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-500 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xl"></div>
-                <div className="relative bg-white p-6 rounded-3xl shadow-xl border border-gray-100">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-500 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xl animate-pulse"></div>
+                <div className="relative bg-white p-6 rounded-3xl shadow-xl border border-gray-100 transform transition-all duration-500 hover:rotate-1 hover:scale-105">
                   <img 
-                    src="/src/assets/images/sign-language-demo.png" 
+                    src={signLanguageDemo}
                     alt="SignBridge Demo" 
                     className="rounded-xl w-full h-auto"
                   />
@@ -66,7 +66,7 @@ const LandingPage = () => {
           
           <div className="grid md:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="bg-purple-50 rounded-xl p-8 transition-all duration-300 hover:shadow-lg hover:transform hover:-translate-y-1">
+            <div className="bg-purple-50 rounded-xl p-8 transition-all duration-300 hover:shadow-lg hover:transform hover:-translate-y-2 hover:bg-purple-100 border border-transparent hover:border-purple-200">
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
                 <MessageSquare className="h-6 w-6 text-purple-600" />
               </div>
@@ -77,7 +77,7 @@ const LandingPage = () => {
             </div>
             
             {/* Feature 2 */}
-            <div className="bg-indigo-50 rounded-xl p-8 transition-all duration-300 hover:shadow-lg hover:transform hover:-translate-y-1">
+            <div className="bg-indigo-50 rounded-xl p-8 transition-all duration-300 hover:shadow-lg hover:transform hover:-translate-y-2 hover:bg-indigo-100 border border-transparent hover:border-indigo-200">
               <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
                 <Globe className="h-6 w-6 text-indigo-600" />
               </div>
@@ -88,7 +88,7 @@ const LandingPage = () => {
             </div>
             
             {/* Feature 3 */}
-            <div className="bg-blue-50 rounded-xl p-8 transition-all duration-300 hover:shadow-lg hover:transform hover:-translate-y-1">
+            <div className="bg-blue-50 rounded-xl p-8 transition-all duration-300 hover:shadow-lg hover:transform hover:-translate-y-2 hover:bg-blue-100 border border-transparent hover:border-blue-200">
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
                 <Users className="h-6 w-6 text-blue-600" />
               </div>
@@ -109,36 +109,29 @@ const LandingPage = () => {
             Join thousands of users who are already experiencing barrier-free communication with SignBridge.
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <Link to="/register" className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-purple-700 bg-white hover:bg-gray-50 shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1">
+            <Link to="/register" className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-purple-700 bg-white hover:bg-gray-50 shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
               Create Free Account
             </Link>
-            <Link to="/login" className="inline-flex items-center justify-center px-8 py-4 border border-white text-base font-medium rounded-md text-white hover:bg-purple-700 transition duration-300 ease-in-out">
+            <Link to="/login" className="inline-flex items-center justify-center px-8 py-4 border border-white text-base font-medium rounded-md text-white hover:bg-purple-700 transition duration-300 ease-in-out hover:scale-105">
               Sign In
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer - Removed the About, Features, Contact, Privacy buttons */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center mb-6 md:mb-0">
+          <div className="flex justify-center items-center">
+            <div className="flex items-center">
               <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg flex items-center justify-center mr-3">
                 <Hand className="h-6 w-6 text-white" />
               </div>
               <span className="text-xl font-bold">SignBridge</span>
             </div>
-            
-            <div className="flex space-x-6">
-              <a href="#" className="text-gray-300 hover:text-white transition duration-300">About</a>
-              <a href="#" className="text-gray-300 hover:text-white transition duration-300">Features</a>
-              <a href="#" className="text-gray-300 hover:text-white transition duration-300">Privacy</a>
-              <a href="#" className="text-gray-300 hover:text-white transition duration-300">Contact</a>
-            </div>
           </div>
           
-          <div className="mt-8 pt-8 border-t border-gray-800 text-center md:text-left text-gray-400">
+          <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
             <p>© {new Date().getFullYear()} SignBridge. All rights reserved.</p>
           </div>
         </div>
