@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Hand, ArrowRight, MessageSquare, Globe, Users, Shield } from 'lucide-react';
+// Add this import at the top of the file
+import signLanguageDemo from '../assets/images/sign-language-demo.png';
 
 const LandingPage = () => {
   return (
@@ -41,7 +43,7 @@ const LandingPage = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-500 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xl"></div>
                 <div className="relative bg-white p-6 rounded-3xl shadow-xl border border-gray-100">
                   <img 
-                    src="https://placehold.co/600x400/9333ea/FFFFFF/png?text=SignBridge+Demo" 
+                    src="/src/assets/images/sign-language-demo.png" 
                     alt="SignBridge Demo" 
                     className="rounded-xl w-full h-auto"
                   />
