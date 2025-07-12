@@ -12,6 +12,7 @@ import SignLanguagePlayer from "./components/SignLanguagePlayer";
 import SpeechToText from "./components/SpeechToText";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import LandingPage from "./components/LandingPage";
 import { Hand, Mic, Moon, Sun, LogOut, User } from "lucide-react";
 
 const PrivateRoute = ({ children }) => {
@@ -66,7 +67,7 @@ const NavBar = () => {
               <Hand className="h-5 w-5 text-white" />
             </div>
             <span className="text-xl font-bold text-gray-900 dark:text-white">
-              SignSpeak
+              SignBridge
             </span>
           </div>
 
@@ -123,18 +124,32 @@ const NavBar = () => {
               )}
             </button>
 
-            {/* User email and logout */}
-            <div className="flex items-center space-x-2">
-              <div className="hidden md:block text-sm text-gray-700 dark:text-gray-300">
-                {user?.email}
-              </div>
+            {/* User menu */}
+            <div className="relative">
               <button
-                onClick={handleLogout}
-                className="flex items-center space-x-1 px-3 py-2 rounded-lg text-red-600 dark:text-red-300 hover:bg-red-50 dark:hover:bg-blue-700 transition-colors transform hover:scale-105"
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                className="flex items-center space-x-2 p-2 rounded-lg hover:bg-purple-100 dark:hover:bg-blue-700 transition-colors"
               >
-                <LogOut className="h-4 w-4" />
-                <span className="text-sm font-medium">Logout</span>
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center justify-center text-white">
+                  <User className="h-5 w-5" />
+                </div>
+                <span className="text-gray-900 dark:text-white font-medium hidden sm:block">
+                  {user?.name || "User"}
+                </span>
               </button>
+
+              {/* Dropdown menu */}
+              {isUserMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-1 z-10 border border-gray-200 dark:border-gray-700">
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center w-full px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-gray-700"
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Sign out
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -145,7 +160,7 @@ const NavBar = () => {
 
 const DashboardLayout = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-white">
       <NavBar />
       <main className="container mx-auto px-4 py-8 max-w-7xl">
         <Outlet />
@@ -157,7 +172,7 @@ const DashboardLayout = () => {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navigate to="/login" replace />,
+    element: <LandingPage />,
   },
   {
     path: "login",
