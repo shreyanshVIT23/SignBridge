@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '/src/contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { User, Mail, Lock, Hand, ArrowRight } from 'lucide-react';
@@ -12,11 +12,41 @@ const Register = () => {
   const [darkMode, setDarkMode] = useState(false);
   const { register } = useAuth();
   const navigate = useNavigate();
+  const vantaRef = useRef(null);
+  const vantaEffect = useRef(null);
 
   // Check for dark mode preference in localStorage
   useEffect(() => {
     const savedMode = localStorage.getItem("darkMode");
     setDarkMode(savedMode ? JSON.parse(savedMode) : false);
+  }, []);
+
+  // Initialize Vanta.js effect
+  useEffect(() => {
+    if (!vantaEffect.current && vantaRef.current) {
+      vantaEffect.current = window.VANTA.HALO({
+        el: vantaRef.current,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        backgroundColor: 0x131a43,
+        baseColor: 0x1a59,
+        size: 2.00,
+        amplitudeFactor: 1.50,
+        xOffset: 0.13,
+        yOffset: 0.05
+      });
+    }
+    
+    // Cleanup function
+    return () => {
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
+        vantaEffect.current = null;
+      }
+    };
   }, []);
 
   const handleSubmit = async (e) => {
@@ -35,14 +65,7 @@ const Register = () => {
   };
 
   return (
-    <div className={`min-h-screen flex items-center justify-center p-4 relative overflow-hidden ${darkMode ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900' : 'bg-gradient-to-br from-indigo-600 via-purple-500 to-pink-500'}`}>
-      {/* Animated background elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        <div className={`absolute top-1/4 right-1/4 w-64 h-64 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob ${darkMode ? 'bg-indigo-800' : 'bg-indigo-300'}`}></div>
-        <div className={`absolute top-1/3 left-1/4 w-72 h-72 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000 ${darkMode ? 'bg-purple-800' : 'bg-purple-300'}`}></div>
-        <div className={`absolute bottom-1/4 right-1/3 w-80 h-80 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000 ${darkMode ? 'bg-pink-800' : 'bg-pink-300'}`}></div>
-      </div>
-      
+    <div ref={vantaRef} className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
       <div className="max-w-md w-full z-10">
         {/* Logo and branding */}
         <div className="flex items-center justify-center mb-8">
