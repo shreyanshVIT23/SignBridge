@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -6,6 +6,7 @@ import {
   Outlet,
   Link,
   useLocation,
+  useNavigate, // Add this import
 } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import SignLanguagePlayer from "./components/SignLanguagePlayer";
@@ -35,6 +36,7 @@ const PrivateRoute = ({ children }) => {
 const NavBar = () => {
   const location = useLocation();
   const { user, logout } = useAuth();
+  const navigate = useNavigate(); // Add this line to import navigate
   const [darkMode, setDarkMode] = useState(() => {
     const savedMode = localStorage.getItem("darkMode");
     return savedMode ? JSON.parse(savedMode) : false;
@@ -55,6 +57,7 @@ const NavBar = () => {
   const handleLogout = () => {
     logout();
     setIsUserMenuOpen(false);
+    navigate('/'); // Add this line to redirect to landing page
   };
 
   return (
@@ -159,12 +162,47 @@ const NavBar = () => {
 };
 
 const DashboardLayout = () => {
+  const vantaRef = useRef(null);
+  const [vantaEffect, setVantaEffect] = useState(null);
+
+  useEffect(() => {
+    if (!vantaEffect && vantaRef.current) {
+      setVantaEffect(
+        VANTA.NET({
+          el: vantaRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          color: 0xff3f81,
+          backgroundColor: 0x23153c,
+          points: 10,
+          maxDistance: 20,
+          spacing: 15,
+          showDots: true
+        })
+      );
+    }
+    
+    return () => {
+      if (vantaEffect) vantaEffect.destroy();
+    };
+  }, [vantaEffect]);
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-white">
-      <NavBar />
-      <main className="container mx-auto px-4 py-8 max-w-7xl">
-        <Outlet />
-      </main>
+    <div 
+      ref={vantaRef} 
+      className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-white relative"
+    >
+      <div className="relative z-10">
+        <NavBar />
+        <main className="container mx-auto px-4 py-8 max-w-7xl">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };
