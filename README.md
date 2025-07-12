@@ -68,20 +68,19 @@ pip install -r requirements.txt
 3. Setup Frontend:
 ```bash
 cd ../frontend
-npm install
+npm i
 ```
 
 4. Start Backend Server:
 ```bash
-cd ../backend
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-uvicorn main:app --reload --port 8000
+cd backend 
+uvicorn app:app --reload --port 8000
 ```
 
 5. In a new terminal, start Frontend:
 ```bash
 cd frontend
-npm start
+npm run dev -- --host --port 5173
 ```
 
 The application will be available at:
