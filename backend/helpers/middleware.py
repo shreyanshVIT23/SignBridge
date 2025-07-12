@@ -8,7 +8,9 @@ Functions:
 """
 
 import re
+
 from fastapi import Request
+
 
 async def sanitize_input(request: Request, call_next):
     """Middleware to sanitize incoming request data.

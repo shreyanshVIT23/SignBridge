@@ -10,15 +10,19 @@ Routes:
 - /api/available-words: Lists all available sign language words.
 """
 
+import logging
+import os
+import time
+
+from database.database import Database
+from database.models import AppLog
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from helpers.middleware import sanitize_input
 from helpers.logging_middleware import DatabaseLoggingMiddleware
-import logging
-import time
+from helpers.middleware import sanitize_input
+from routes.v0.authentication_routes import router as auth_router
 from routes.v0.sign_language_routes import router as sign_language_router
-from database.database import AppLog, SessionLocal, engine, Base
 from utils.config import settings
 
 logging.basicConfig(level=logging.DEBUG)
@@ -37,9 +41,10 @@ app.add_middleware(
 # Add middleware
 app.middleware("http")(DatabaseLoggingMiddleware())
 app.include_router(sign_language_router)
+app.include_router(auth_router)
 
 # Create tables
-Base.metadata.create_all(bind=engine)
+Database.Base.metadata.create_all(bind=Database.get_engine())
 
 # Mount static files
 app.mount("/assets", StaticFiles(directory="assets"), name="assets")
@@ -51,7 +56,7 @@ app.mount("/videos", StaticFiles(directory=str(settings.video_dir), html=True), 
 async def log_request_response(
     request: Request, response_status: int, response_content: str
 ):
-    db = SessionLocal()
+    db = Database.get_session()
     try:
         log_entry = AppLog(
             method=request.method,
@@ -70,39 +75,42 @@ async def log_request_response(
 
 app.middleware("http")(sanitize_input)
 
+if os.getenv("APP_ENV") != "test":
+    app.middleware("http")(DatabaseLoggingMiddleware())
+    app.middleware("http")(sanitize_input)
 
-@app.middleware("http")
-async def logging_middleware(request: Request, call_next):
-    start_time = time.time()
+    @app.middleware("http")
+    async def logging_middleware(request: Request, call_next):
+        start_time = time.time()
 
-    # Get response
-    response = await call_next(request)
-    process_time = time.time() - start_time
+        # Get response
+        response = await call_next(request)
+        process_time = time.time() - start_time
 
-    # Extract response content safely
-    content = ""
-    try:
-        # For JSON responses, we can get a summary
-        if hasattr(response, "body"):
-            # This approach works better for FastAPI responses
-            if response.status_code < 400:
-                content = f"Success response - Status: {response.status_code}"
+        # Extract response content safely
+        content = ""
+        try:
+            # For JSON responses, we can get a summary
+            if hasattr(response, "body"):
+                # This approach works better for FastAPI responses
+                if response.status_code < 400:
+                    content = f"Success response - Status: {response.status_code}"
+                else:
+                    content = f"Error response - Status: {response.status_code}"
             else:
-                content = f"Error response - Status: {response.status_code}"
-        else:
-            content = f"Response - Status: {response.status_code}"
-    except Exception:
-        content = f"<could not read response> - Status: {response.status_code}"
+                content = f"Response - Status: {response.status_code}"
+        except Exception:
+            content = f"<could not read response> - Status: {response.status_code}"
 
-    # Log to database
-    await log_request_response(request, response.status_code, content)
+        # Log to database
+        await log_request_response(request, response.status_code, content)
 
-    # Log to console
-    logging.info(
-        f"{request.method} {request.url.path} - {response.status_code} - {process_time:.3f}s"
-    )
+        # Log to console
+        logging.info(
+            f"{request.method} {request.url.path} - {response.status_code} - {process_time:.3f}s"
+        )
 
-    return response
+        return response
 
 
 if __name__ == "__main__":
