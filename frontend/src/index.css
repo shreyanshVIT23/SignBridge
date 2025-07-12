@@ -1,6 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+/* Tailwind utilities */
+@import 'tailwindcss/utilities';
 
 /* SignSpeak Application Custom CSS */
 
