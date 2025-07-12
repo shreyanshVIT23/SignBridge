@@ -7,9 +7,11 @@ Functions:
 - GeminiClient.generate_text: Asynchronously generates sign language text from a given English prompt.
 """
 
+import asyncio
+
 from google import genai
 from utils.config import settings
-import asyncio
+
 # Note: You need to have the google genai package installed and GOOGLE_API_KEY set
 
 

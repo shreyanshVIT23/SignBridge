@@ -8,8 +8,9 @@ Classes:
 - Settings: Configuration settings for the application.
 """
 
-from typing import List
 from pathlib import Path
+from typing import List
+
 from dotenv import load_dotenv
 from pydantic_settings import BaseSettings
 
@@ -47,6 +48,7 @@ class Settings(BaseSettings):
     port: int = 8000
     video_dir: Path = BASE_DIR / "assets" / "videos"
     gemini_api_key: str
+    database_url: str
     cors_origins: List[str] = []
 
     class Config:
