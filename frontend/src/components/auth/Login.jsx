@@ -155,6 +155,16 @@ const Login = () => {
                 )}
               </button>
             </div>
+            
+            {/* Back to Home button - Add this inside the form */}
+            <div className="mt-4 text-center">
+              <Link to="/" className={`inline-flex items-center text-sm font-medium ${darkMode ? 'text-purple-400 hover:text-purple-300' : 'text-purple-600 hover:text-purple-500'}`}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to Home
+              </Link>
+            </div>
           </form>
           
           <div className="mt-6 text-center">

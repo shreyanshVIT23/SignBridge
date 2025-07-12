@@ -6,6 +6,7 @@ import {
   Outlet,
   Link,
   useLocation,
+  useNavigate, // Add this import
 } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import SignLanguagePlayer from "./components/SignLanguagePlayer";
@@ -35,6 +36,7 @@ const PrivateRoute = ({ children }) => {
 const NavBar = () => {
   const location = useLocation();
   const { user, logout } = useAuth();
+  const navigate = useNavigate(); // Add this line to import navigate
   const [darkMode, setDarkMode] = useState(() => {
     const savedMode = localStorage.getItem("darkMode");
     return savedMode ? JSON.parse(savedMode) : false;
@@ -55,6 +57,7 @@ const NavBar = () => {
   const handleLogout = () => {
     logout();
     setIsUserMenuOpen(false);
+    navigate('/'); // Add this line to redirect to landing page
   };
 
   return (
