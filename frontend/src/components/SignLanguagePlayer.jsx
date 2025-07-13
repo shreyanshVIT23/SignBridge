@@ -269,7 +269,7 @@ const SignLanguagePlayer = () => {
           <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl flex items-center justify-center">
             <Hand className="h-6 w-6 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-white">
             Sign Language Converter
           </h1>
         </div>

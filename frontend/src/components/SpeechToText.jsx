@@ -198,7 +198,7 @@ const SpeechToText = () => {
           <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
             <Mic className="h-6 w-6 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Speech to Text</h1>
+          <h1 className="text-3xl font-bold text-white">Speech to Text</h1>
         </div>
         <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           Convert your speech to text in real-time with AI-powered speech recognition. Support for multiple languages and high accuracy.
