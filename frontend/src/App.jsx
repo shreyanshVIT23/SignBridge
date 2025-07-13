@@ -193,10 +193,11 @@ const DashboardLayout = () => {
   }, [vantaEffect]);
 
   return (
-    <div 
-      ref={vantaRef} 
-      className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-white relative"
-    >
+    <div className="relative min-h-screen">
+      <div 
+        ref={vantaRef} 
+        className="fixed inset-0 z-0"
+      ></div>
       <div className="relative z-10">
         <NavBar />
         <main className="container mx-auto px-4 py-8 max-w-7xl">
